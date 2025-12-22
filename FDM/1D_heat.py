@@ -48,7 +48,7 @@ def animate(t):
 
 u = update_temps(u)
 anim = FuncAnimation(plt.figure(), animate, interval=15, frames=iterations, repeat=False)
-anim.save(f'heat_sim_1D.mp4')
+anim.save(f'heat_sim_1D.gif')
 
 end = time.perf_counter()
 duration = end-start
