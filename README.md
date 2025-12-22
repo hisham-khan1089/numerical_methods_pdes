@@ -1,24 +1,11 @@
-# Exploration of Numerical Methods for PDEs
-(Ongoing)
+# Exploration of Numerical Methods for PDEs (ongoing)
+This repository contains Python files in which various numerical methods for PDEs have been implemented. The folders are 
+organized by type of numerical method, and containing the Python files corresponding to that method used to generate the
+simulation files for the given PDE. 
 
-This repository contains
-- My notes from chapter 6 of Haberman's Applied PDEs with Fourier Series and Boundary Value Problems
-- Simulations of some basic PDEs in Python, along with video files
+The file called `example_sims` contains mp4s of the simulations that were generated using the Python code.
 
-This project is ongoing, and the files in this will be updated as I continue to do 
-more research.
+My main reference from which I learned and implemented the numerical methods in this repository is Chapter 6 of the textbook 
+Applied PDEs with Fourier Series and Boundary Value Problems by Haberman (4th edition). 
 
-## 
-
-The two key dependencies in this file are:
-```bash
-numpy
-matplotlib
-```
-
-These can be installed using pip
-
-## Creating Simulations
-
-
-## Heat Equation
+This is an ongoing project, and I will continue to add to this repository as I continue to learn. 
