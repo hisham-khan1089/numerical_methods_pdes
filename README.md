@@ -1,11 +1,18 @@
 # Exploration of Numerical Methods for PDEs (ongoing)
-This repository contains Python files in which various numerical methods for PDEs have been implemented. The folders are 
-organized by type of numerical method, and containing the Python files corresponding to that method used to generate the
-simulation files for the given PDE. 
+This repository contains Python files in which various numerical methods for PDEs have been implemented.
 
-The file called `example_sims` contains mp4s of the simulations that were generated using the Python code.
+See `example_sims` for the simulations that were generated using the Python code (mp4s and pngs).
+See `FDM` for the Python scripts use to generate the simulations. These are all based on the finite difference method.
+See `Notes` for detailed notes I took while learning about FDM. These include derivations of some finite difference equations 
+with some basic error analysis, as well as an analysis of the stability of various numerical schemes using Fourier analysis.
 
-My main reference from which I learned and implemented the numerical methods in this repository is Chapter 6 of the textbook 
-Applied PDEs with Fourier Series and Boundary Value Problems by Haberman (4th edition). 
+The notes are based off of
+- the 6th chapter of Haberman’s Applied PDEs with Fourier Series and Boundary Value Problems (4th ed.)
+- lectures from MIT’s graduate-level course on Numerical Methods for Partial Differential Equations (16.920J)
 
-This is an ongoing project, and I will continue to add to this repository as I continue to learn. 
+The following are the dependencies of the scripts:
+```
+numpy
+matplotlib
+scipy
+```
