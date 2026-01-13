@@ -10,13 +10,12 @@ iterations = 500
 
 k = 1.0
 delta_x = 1
-
 delta_t = 0.25
+
 s = (k * delta_t) / (delta_x ** 2)
 
 if s > 0.25:
     print("WARNING: Stability conditions have been violated")
-
 
 # generate square plate for each iteration
 u = np.empty((iterations, L, L))
@@ -34,6 +33,7 @@ u_right = 100.0
 u.fill(u_init)
 
 # set boundary conditions for all iterations
+# numpy indexing: [start:stop:step, etc.], start inclusive, stop exclusive
 u[:, (L-1):, :] = u_top
 u[:, :, :1] = u_left
 u[:, :1, 1:] = u_bottom
@@ -47,7 +47,7 @@ def calculate(u):
     for k in range(0, iterations-1):
         for i in range(1, L-1, delta_x):
             for j in range(1, L-1, delta_x):
-                u[k+1][i][j] = s * (u[k][i+1][j] + u[k][i-1][j] + u[k][i][j+1] + u[k][i][j-1] - 4*u[k][i][j]) + u[k][i][j]
+                u[k+1, i, j] = s * (u[k, i+1, j] + u[k, i-1, j] + u[k, i, j+1] + u[k, i, j-1] - 4*u[k, i, j]) + u[k, i, j]
 
     return u
 
@@ -64,7 +64,7 @@ def update_plot(k, u_k):
     function that generates the plot for a given u_k
 
     k: frame
-    u_k: the temperature profile at frame k
+    u_k: temperature profile at frame k
     """
     plt.cla()
     ax.plot_surface(X, Y, u_k, cmap=plt.cm.viridis)

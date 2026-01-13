@@ -27,7 +27,7 @@ u[:, L:] = u_L
 def update_temps(u): 
     for j in range(0, iterations-1):
         for i in range(1, len(u[0])-1): 
-            u[j+1][i] = s * (u[j][i+1] - 2*u[j][i] + u[j][i-1]) + u[j][i] # partial difference equation
+            u[j+1, i] = s * (u[j, i+1] - 2*u[j, i] + u[j, i-1]) + u[j, i] # partial difference equation
     return u
 
 def plot_temp(u_t, t):
@@ -48,7 +48,7 @@ def animate(t):
 
 u = update_temps(u)
 anim = FuncAnimation(plt.figure(), animate, interval=15, frames=iterations, repeat=False)
-anim.save(f'heat_sim_1D.gif')
+anim.save(f'heat_sim_1D.mp4')
 
 end = time.perf_counter()
 duration = end-start

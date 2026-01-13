@@ -52,7 +52,7 @@ def calculate(u):
     for k in range(0, iterations-1):
         for i in range(1, L-1, delta_x):
             for j in range(1, L-1, delta_x):
-                u[k+1][i][j] = s * (u[k][i+1][j] + u[k][i-1][j] + u[k][i][j+1] + u[k][i][j-1] - 4*u[k][i][j]) + u[k][i][j] + \
+                u[k+1, i, j] = s * (u[k, i+1, j] + u[k, i-1, j] + u[k, i, j+1] + u[k, i, j-1] - 4*u[k, i, j]) + u[k, i, j] + \
                 delta_t*f(i*delta_x, j*delta_x, k*delta_t)
 
     return u
@@ -94,7 +94,7 @@ def animate(k):
     return update_plot(k, u[k])
 
 animation = FuncAnimation(fig=fig, func=animate, frames = iterations, interval = 40, repeat = False)
-animation.save(f'nonhomogeneous_heat_sim_2D.gif')
+animation.save(f'nonhomogeneous_heat_sim_2D.mp4')
 # plt.show() # NOTE: Execution time will only be printed if you close the figure window 
 
 end = time.perf_counter()
