@@ -50,7 +50,7 @@ ax.set_zlabel("u")
 
 ax.set_xlim(0, Lx)
 ax.set_ylim(0, Ly)
-ax.view_init(30, 225, 0)
+ax.view_init(25, -45, 0)
 plt.savefig("2D_poisson.png", dpi=300)
 plt.show()
 
