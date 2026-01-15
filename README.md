@@ -18,4 +18,4 @@ scipy
 ```
 
 Here is an example simulation:
-![example sim](/example_sims/nonhomogeneous_2D_heat_sim.mp4)
+![example sim](/example_sims/2D_poisson.png)
