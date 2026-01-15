@@ -1,5 +1,5 @@
 # Exploration of Numerical Methods for PDEs
-This repository contains Python files in which various numerical methods for PDEs have been implemented.
+This repository contains Python files in which numerical methods for various PDEs have been implemented.
 
 See `example_sims` for the simulations that were generated using the Python code (mp4s and pngs).  
 See `FDM` for the Python scripts use to generate the simulations. These are all based on the finite difference method.  
