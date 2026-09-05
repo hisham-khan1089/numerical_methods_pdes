@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import time
 
-class _1D_heat:
+class heat_1D:
     length: float       # rod length
     k: float            # thermal diffusivity
     delta_x: float      # spacial discretization
