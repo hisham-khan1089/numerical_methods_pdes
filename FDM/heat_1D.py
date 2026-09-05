@@ -29,8 +29,7 @@ class heat_1D:
 
     def __initialize_grid(self):
         """Initialize the temperature grid for all time iterations. (private method)"""
-        self.num_grid_points = np.floor(self.length / self.delta_x)
-        self.num_grid_points = int(self.num_grid_points)
+        self.num_grid_points = int(np.floor(self.length / self.delta_x))
         self.u=np.zeros((self.iterations, self.num_grid_points+1))
         self.u[:, :1] = self.u_0
         self.u[:, self.num_grid_points:] = self.u_L
