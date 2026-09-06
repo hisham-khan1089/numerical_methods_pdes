@@ -6,7 +6,7 @@ import time
 class heat_1D:
     length: float       # rod length
     k: float            # thermal diffusivity
-    delta_x: float      # spacial discretization
+    delta_x: float      # spatial discretization
     delta_t: float      # temporal discretization
     iterations: int   # number of time iterations
     u_0: float          # left boundary condition (x=0)
@@ -14,8 +14,8 @@ class heat_1D:
 
     def __init__(self, length, k, delta_x, delta_t, iterations, u_0, u_L):
 
-        if (k * delta_t) / (delta_x ** 2) > 0.5:
-            raise ValueError("Stability condition (k * delta_t) / (delta_x^2) <= 0.5 has been violated.")
+        if (k * delta_t) / (delta_x ** 2) >= 0.5:
+            raise ValueError("Stability condition (k * delta_t) / (delta_x^2) < 0.5 has been violated.")
         if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
 
@@ -43,7 +43,6 @@ class heat_1D:
             for i in range(1, len(self.u[0])-1): 
                 self.u[j+1, i] = s * (self.u[j, i+1] - 2*self.u[j, i] + self.u[j, i-1]) + self.u[j, i] # partial difference equation
         print("Solving complete!")
-        return self
 
     def __generate_and_save_animation(self, path: str= None):
         """Generate mp4 file containing time evolution of temperature of rod over time. (private method)"""
