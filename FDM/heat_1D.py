@@ -44,7 +44,7 @@ class heat_1D:
                 self.u[j+1, i] = s * (self.u[j, i+1] - 2*self.u[j, i] + self.u[j, i-1]) + self.u[j, i] # partial difference equation
         print("Solving complete!")
 
-    def __generate_and_save_animation(self, path: str= None):
+    def __generate_and_save_animation(self):
         """Generate mp4 file containing time evolution of temperature of rod over time. (private method)"""
         print("Animating results...")
         def plot_temp(u_t, t):
@@ -69,7 +69,10 @@ class heat_1D:
 
     def solve_and_generate(self):
         """Solve for time evolution of temperature and create animation. (public method)"""
+        start = time.perf_counter()
         self.__solve()
         self.__generate_and_save_animation()
+        end = time.perf_counter()
+        print(f"Execution time: {end-start} seconds")
 
 
