@@ -8,7 +8,7 @@ class heat_1D:
     k: float            # thermal diffusivity
     delta_x: float      # spatial discretization
     delta_t: float      # temporal discretization
-    iterations: int   # number of time iterations
+    iterations: int     # number of time iterations
     u_0: float          # left boundary condition (x=0)
     u_L: float          # right boundary condition (x=L)
 
@@ -40,8 +40,7 @@ class heat_1D:
         s = (self.k * self.delta_t) / (self.delta_x **2)
         print("Solving partial difference equation...")
         for j in range(0, self.iterations-1):
-            for i in range(1, len(self.u[0])-1): 
-                self.u[j+1, i] = s * (self.u[j, i+1] - 2*self.u[j, i] + self.u[j, i-1]) + self.u[j, i] # partial difference equation
+            self.u[j+1, 1:-1] = s * (self.u[j, 2:] + self.u[j, :-2]) + (1-2*s)*self.u[j, 1:-1] # numpy vectorized partial difference equation
         print("Solving complete!")
 
     def __generate_and_save_animation(self):
@@ -65,7 +64,7 @@ class heat_1D:
 
         anim = FuncAnimation(plt.figure(), animate, interval=15, frames=self.iterations, repeat=False)
         anim.save(f'heat_sim_1D.mp4')
-        print("Saved results!")
+        print("Saved animation!")
 
     def solve_and_generate(self):
         """Solve for time evolution of temperature and create animation. (public method)"""
@@ -73,6 +72,7 @@ class heat_1D:
         self.__solve()
         self.__generate_and_save_animation()
         end = time.perf_counter()
-        print(f"Execution time: {end-start} seconds")
+        print(f"Execution time: {end-start:.4f} seconds")
 
-
+solver = heat_1D(20, 1, 0.5, 0.1, 500, 100, 0)
+solver.solve_and_generate()
