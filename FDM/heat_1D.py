@@ -6,15 +6,15 @@ from numba import njit
 
 @njit
 def initialize_grid(iterations, num_grid_points, u_0, u_L):
-    u=np.zeros((iterations, num_grid_points+1))
+    u=np.zeros((iterations+1, num_grid_points+1))
     u[:, :1] = u_0
     u[:, num_grid_points:] = u_L
     return u
 
 @njit
 def solve_u(u, s, iterations, num_grid_points):
-    for j in range(0, iterations-1):
-        for i in range(1, num_grid_points-1): 
+    for j in range(0, iterations):
+        for i in range(1, num_grid_points): 
             u[j+1, i] = s * (u[j, i+1] - 2*u[j, i] + u[j, i-1]) + u[j, i]
     return u
 
@@ -51,6 +51,7 @@ class heat_1D:
 
     def solve(self): 
         """Solve the temperature grid for each time iteration. (public method)"""
+
         self.solved = True
         start_time = time.perf_counter()
 
@@ -61,7 +62,7 @@ class heat_1D:
         end_time = time.perf_counter()
         self.solve_time = end_time - start_time
 
-    def _generate_and_save_animation(self):
+    def _generate_and_save_animation(self, filename: str):
         """Generate mp4 file containing time evolution of temperature of rod over time. (private method)"""
 
         print("Animating results...")
@@ -70,29 +71,35 @@ class heat_1D:
         ax.set_xlabel("x")
         ax.set_ylabel("Temperature")
         ax.set_xlim(0, self.length)
-        ax.set_ylim(min(self.u_0, self.u_L), max(self.u_0, self.u_L))
+
+        min_ylim = min(self.u_0, self.u_L, min(self.u[0]))
+        max_ylim = max(self.u_0, self.u_L)
+        padding = 0.05 * (max_ylim-min_ylim)
+        ax.set_ylim(min_ylim, max_ylim+padding)
 
         line, = ax.plot([self.delta_x*i for i in range(self.num_grid_points+1)], self.u[0])
 
         title_text = ax.set_title("")
 
         def plot_temp(u_t, t):
-            title_text.set_text(f"Temperature at t = {t * self.delta_t:.3f} unit time")
+            title_text.set_text(f"Temperature at t = {t * self.delta_t:.3f} s")
             line.set_ydata(u_t)
             return line, title_text
 
         def _animate(t):
             return plot_temp(self.u[t],t)
 
-        anim = FuncAnimation(fig, _animate, interval=15, frames=self.iterations, repeat=False, blit=True)
-        anim.save(f'heat_sim_1D.mp4')
+        anim = FuncAnimation(fig, _animate, interval=15, frames=self.iterations+1, repeat=False, blit=True)
+        anim.save(filename)
         print("Saved animation!")
 
-    def animate(self):
+    def animate(self, filename: str):
         """Solve for time evolution of temperature and create animation. (public method)"""
         if self.solved is False:
             self.solve()
-        self._generate_and_save_animation()
+        self._generate_and_save_animation(filename)
 
-solver = heat_1D(20, 1, 0.5, 0.1, 500, 100, 0)
-solver.animate()
+
+if __name__ == "__main__":
+    solver = heat_1D(length=20, k=1, delta_x=0.5, delta_t=0.1, iterations=500, u_0=100, u_L=100)
+    solver.animate(filename="heat_1D_test.mp4")
