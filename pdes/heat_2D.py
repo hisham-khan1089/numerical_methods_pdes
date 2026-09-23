@@ -57,12 +57,16 @@ class heat_2D:
 
     def _initialize_grid(self):
         """Initialize the temperature grid for all time iterations. (private method)"""
+
+        print("Initializing grid...")
         self.num_grid_points = int(self.length // self.delta_x)
         self.length = self.delta_x * self.num_grid_points
         self.u = initialize_grid(self.iterations, self.num_grid_points, 
                                  self.u_top, self.u_left, self.u_bottom, self.u_right)
 
     def solve(self):
+
+        print("Calculating temperature grid values...")
 
         self.solved = True
         start_time = time.perf_counter()
@@ -73,8 +77,13 @@ class heat_2D:
 
         end_time = time.perf_counter()
         self.solve_time = end_time - start_time
+        print(f"Calculation completed! Execution time: {self.solve_time:.4f} s")
 
     def _generate_and_save_animation(self, filename: str):
+
+        print("Animating results...")
+
+        start_time = time.perf_counter()
 
         fig, ax = plt.subplots()
         ax.set_xlabel("x")
@@ -99,7 +108,10 @@ class heat_2D:
 
         anim = FuncAnimation(fig, _animate, interval=15, frames=self.iterations+1, repeat=False, blit=True)
         anim.save(filename)
-        print("Saved animation!")
+
+        end_time = time.perf_counter()
+        self.animation_time = end_time-start_time
+        print(f"Saved animation! Execution time: {self.animation_time:.4f} s")
 
     def animate(self, filename: str):
         """Solve for time evolution of temperature and create animation. (public method)"""
