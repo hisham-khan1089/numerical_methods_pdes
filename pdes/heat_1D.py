@@ -33,6 +33,10 @@ class heat_1D:
             raise ValueError("Stability condition (k * delta_t) / (delta_x^2) < 0.5 has been violated.")
         if not isinstance(iterations, int) and iterations > 1:
             raise TypeError("iterations must be a positive integer greater than 1.")
+        if length <= 0:
+            raise ValueError("length must be a positive number.")
+        if delta_t <= 0 or delta_x <= 0:
+            raise ValueError("Spatial and temporal discretizations (delta_x and delta_t) must be positive numbers.")
 
         self.length = length
         self.k = k

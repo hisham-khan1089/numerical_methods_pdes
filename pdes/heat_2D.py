@@ -38,6 +38,10 @@ class heat_2D:
             raise ValueError("Stability condition (k * delta_t) / (delta_x^2) < 0.25 has been violated.")
         if not isinstance(iterations, int) and iterations > 1:
             raise TypeError("iterations must be a positive integer greater than 1.")
+        if length <= 0:
+            raise ValueError("length must be a positive number.")
+        if delta_t <= 0 or delta_x <= 0:
+            raise ValueError("Spatial and temporal discretizations (delta_x and delta_t) must be positive numbers.")
 
         self.length = length
         self.k = k
@@ -54,6 +58,7 @@ class heat_2D:
     def _initialize_grid(self):
         """Initialize the temperature grid for all time iterations. (private method)"""
         self.num_grid_points = int(self.length // self.delta_x)
+        self.length = self.delta_x * self.num_grid_points
         self.u = initialize_grid(self.iterations, self.num_grid_points, 
                                  self.u_top, self.u_left, self.u_bottom, self.u_right)
 
