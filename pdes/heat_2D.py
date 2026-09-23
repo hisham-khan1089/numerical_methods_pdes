@@ -21,7 +21,7 @@ def solve_u(u, s, iterations, num_grid_points):
                 u[k+1, i, j] = s * (u[k, i+1, j] + u[k, i-1, j] + u[k, i, j+1] + u[k, i, j-1] - 4*u[k, i, j]) + u[k, i, j]
     return u
 
-class heat_2D:
+class Heat2D:
     length: float       # square surface side length
     k: float            # thermal diffusivity
     delta_x: float      # spacial discretization
@@ -121,5 +121,5 @@ class heat_2D:
 
 
 if __name__ == "__main__":
-    solver = heat_2D(length=20, k=0.5, delta_x=0.5, delta_t=0.1, iterations=500, u_bottom=100, u_top=100, u_left=100, u_right=100)
+    solver = Heat2D(length=20, k=0.5, delta_x=0.5, delta_t=0.1, iterations=500, u_bottom=100, u_top=100, u_left=100, u_right=100)
     solver.animate(filename="heat_2D_test.mp4")

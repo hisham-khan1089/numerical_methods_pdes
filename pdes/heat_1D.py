@@ -18,7 +18,7 @@ def solve_u(u, s, iterations, num_grid_points):
             u[j+1, i] = s * (u[j, i+1] - 2*u[j, i] + u[j, i-1]) + u[j, i]
     return u
 
-class heat_1D:
+class Heat1D:
     length: float       # rod length
     k: float            # thermal diffusivity
     delta_x: float      # spatial discretization
@@ -113,5 +113,5 @@ class heat_1D:
 
 
 if __name__ == "__main__":
-    solver = heat_1D(length=20, k=1, delta_x=0.5, delta_t=0.1, iterations=500, u_0=100, u_L=100)
+    solver = Heat1D(length=20, k=1, delta_x=0.5, delta_t=0.1, iterations=500, u_0=100, u_L=100)
     solver.animate(filename="heat_1D_test.mp4")
