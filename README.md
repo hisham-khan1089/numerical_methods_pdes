@@ -60,7 +60,7 @@ numba
 ```
 
 Here is an example simulation for the 2D heat equation:
-<video src="simulations/heat_1D_sim.mp4.mp4" controls width="640" height="640">
+<video src="simulations/heat_2D_sim.mp4" controls width="640" height="640">
 </video>
 <!-- Visualizations & Simulations
 
