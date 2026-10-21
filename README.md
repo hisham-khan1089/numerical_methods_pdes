@@ -60,8 +60,8 @@ numba
 ```
 
 Here is an example simulation for the 2D heat equation:
-![example sim](/simulations/heat_2D_sim.mp4)
-
+<video src="simulations/heat_1D_sim.mp4.mp4" controls width="640" height="640">
+</video>
 <!-- Visualizations & Simulations
 
 Simulation Files
