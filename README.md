@@ -60,6 +60,7 @@ numba
 ```
 
 Here is an example simulation for the 2D heat equation:
+
 https://github.com/user-attachments/assets/0bbb60c4-a8eb-43fd-aa51-23c83340d1e8
 
 
