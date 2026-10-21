@@ -1,2 +1,4 @@
 tests/
 example_sims/
+pdes/nonhomogeneous_2D_heat.py
+pdes/2D_poisson.py

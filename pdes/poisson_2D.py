@@ -54,3 +54,30 @@ ax.view_init(25, -45, 0)
 plt.savefig("2D_poisson.png", dpi=300)
 plt.show()
 
+class Poisson2D:
+    length: float       # rod length
+    k: float            # thermal diffusivity
+    delta_x: float      # spatial discretization
+    iterations: int     # number of time iterations
+    func: function      # function to define initial conditions
+
+    def __init__(self, length, k, delta_x, iterations, u_0, u_L):
+
+        if not isinstance(iterations, int) and iterations > 1:
+            raise TypeError("iterations must be a positive integer greater than 1.")
+        if length <= 0:
+            raise ValueError("length must be a positive number.")
+        if delta_x <= 0:
+            raise ValueError("Spatial discretizations (delta_x) must be a positive number.")
+
+        self.length = length
+        self.k = k
+        self.delta_x = delta_x
+        self.iterations = iterations
+        self.u_0 = u_0
+        self.u_L = u_L 
+
+        self.solved = False
+
+    def _initialize_grid(self):
+        
